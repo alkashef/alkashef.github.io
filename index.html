@@ -1,52 +1,120 @@
 <!DOCTYPE html>
+
 <html>
-<head>
-<title>github workshop</title>
-<link rel="stylesheet" href="screen.css">
-</head>
-<body>
-<h1 id="alkashef-s-github-workshop">alkashef&#39;s github workshop</h1>
-<h2 id="languages">languages</h2>
-<h3 id="r">r</h3>
-<ul>
-<li><p><a href="https://github.com/alkashef/cleaningexceldata">cleaning excel data</a>: pre-processing excel files before loading them into r</p>
-</li><li><p><a href="https://github.com/alkashef/cleaninghumanactivityrecognitiondataset">cleaning human activity recognition dataset</a>: cleaning a data set for human activity recognition using smartphones in r </p>
-</li><li><p><a href="https://github.com/alkashef/exploratorydataanalysis01">exploratory data analysis</a>: exploratory data analysis of electric power consumption data  </p>
-</li></ul>
-<h3 id="python">python</h3>
-<ul>
-<li><a href="https://github.com/alkashef/sleepeegdataproject">sleep eeg data project</a>: studying the effect of sleep deprivation on patterns of sleep stages </li></ul>
-<h3 id="matlab">matlab</h3>
-<ul>
-<li><a href="https://github.com/alkashef/colorflood">color flood</a>: matlab implementation of the color flood game </li></ul>
-<h2 id="algorithms">algorithms</h2>
-<ul>
-<li><a href="https://github.com/alkashef/colorflood">color flood</a>: the flooding function implements the stack-based recursive (four-way) algorithm</li></ul>
-<h2 id="applications">applications</h2>
-<h3 id="data-science">data science</h3>
-<ul>
-<li><p><a href="https://github.com/alkashef/cleaningexceldata">cleaning excel data</a>: pre-processing excel files before loading them into r</p>
-</li><li><p><a href="https://github.com/alkashef/cleaninghumanactivityrecognitiondataset">cleaning human activity recognition dataset</a>: cleaning a data set for human activity recognition using smartphones in r </p>
-</li><li><p><a href="https://github.com/alkashef/exploratorydataanalysis01">exploratory data analysis</a>: exploratory data analysis of electric power consumption data  </p>
-</li></ul>
-<h3 id="neuroscience">neuroscience</h3>
-<ul>
-<li><a href="https://github.com/alkashef/sleepeegdataproject">sleep eeg data project</a>: studying the effect of sleep deprivation on patterns of sleep stages </li></ul>
-<h3 id="games">games</h3>
-<ul>
-<li><a href="https://github.com/alkashef/colorflood">color flood</a>: flood a coloured board with a single color in the minimum number of steps</li></ul>
-<h2 id="guides">guides</h2>
-<ul>
-<li><a href="https://github.com/alkashef/cleaningexceldata">cleaning excel data</a>: pre-processing excel files before loading them into r</li></ul>
 
-<hr width="100%" align="centre" color=#fff> 
+	<head>
+	
+		<title>Al-Kashef's GitHub Workshop</title>
 
-css adopted from jasonm23's <a href="https://github.com/jasonm23/markdown-css-themes/blob/gh-pages/screen.css"> screen.css </a>
+		<link rel="stylesheet" href="screen.css">
+	
+	</head>
 
-<br>
-<br>
+	<body>
+		
+		<h1>Al-Kashef's GitHub Workshop</h1>
+		
+		<form class="controls" id="Filters">
+			<table>
+				<tr>
+				<td>
+					<fieldset>
+						<h4>Languages: </h4>
+						<button class="filter" data-filter=".csharp">C#</button>
+						<button class="filter" data-filter=".r">R</button>
+						<button class="filter" data-filter=".python">Python</button>
+						<button class="filter" data-filter=".matlab">Matlab</button>
+						<button class="filter" data-filter=".prolog">Prolog</button>
+						<button class="filter" data-filter=".html">HTML, CSS, JS</button>
+					</fieldset>
+				</td>
+				</tr>
+			
+				<tr>
+				<td>
+					<fieldset>
+					<h4>Applications: </h4>
+						<button class="filter" data-filter=".neuroscience">Neuroscience</button>
+						<button class="filter" data-filter=".datascience">Data Science</button>
+						<button class="filter" data-filter=".games">Games</button>
+						<button class="filter" data-filter=".web">Web</button>
+					</fieldset>
+				</td>
+				</tr>
+			
+				<tr>
+				<td>
+					<fieldset>
+					<h4>Content: </h4>
+						<button class="filter" data-filter=".guide">Guide</button>
+						<button class="filter" data-filter=".snippet">Snippet</button>
+						<button class="filter" data-filter=".code">Code</button>
+					</fieldset>
+				</td>
+				</tr>
+				
+				<tr>
+				<td>
+					<fieldset>
+						<button id="Reset">Clear Filters</button>
+					</fieldset>
+				</td>
+				</tr>
+			</table>
+		</form>
 
-</body>
-
+		<div id="Container" class="container">
+		
+			<div class="mix prolog snippet">
+				<a target="_blank" href="https://github.com/alkashef/prologsnippets">
+				Prolog snippets</a>
+			</div>
+			
+			<div class="mix csharp code">
+				<a target="_blank" href="https://github.com/alkashef/zerocompression">
+				C# implementation of the zero compression algorithm</a>
+			</div>
+			
+			<div class="mix html web code">
+				<a target="_blank" href="https://github.com/alkashef/alkashef.github.io">
+				This workshop's code</a>
+			</div>
+			
+			<div class="mix r datascience code">
+				<a target="_blank" href="https://github.com/alkashef/exploratorydataanalysis01">
+				Exploring electric power consumption data in R</a>
+			</div>
+			
+			<div class="mix datascience guide">
+				<a target="_blank" href="https://github.com/alkashef/cleaningexceldata">
+				Tidying and cleaning data in Excel sheets</a>
+			</div>
+			
+			<div class="mix r datascience code">
+				<a target="_blank" href="https://github.com/alkashef/cleaninghumanactivityrecognitiondataset">
+				Cleaning a data set for human activity recognition using smartphones in R</a>
+			</div>
+			
+			<div class="mix python neuroscience code">
+				<a target="_blank" href="https://github.com/alkashef/sleepeegdataproject">
+				Exploring neural data in Python: studying the effect of sleep deprivation on sleep stages</a>
+			</div>
+			
+			<div class="mix matlab games code">
+				<a target="_blank" href="https://github.com/alkashef/colorflood">
+				Matlab implementation of the color flood game</a>
+			</div>
+		
+		</div>
+		
+		<div class="credit"">
+			<a target="_blank" href="https://mixitup.kunkalabs.com/">This page is using the MixItUp plugin</a>
+		</div>
+		
+		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script src="http://cdn.jsdelivr.net/jquery.mixitup/latest/jquery.mixitup.min.js"></script>
+		<script src="main.js"></script>
+	
+	</body>
+	
 </html>
-<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->
