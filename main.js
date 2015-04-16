@@ -13,7 +13,7 @@ var buttonFilter = {
   // The "init" method will run on document ready and cache any jQuery objects we will need.
   
   init: function(){
-    var self = this; // As a best practice, in each method we will asign "this" to the variable "self" so that it remains scope-agnostic. We will use it to refer to the parent "buttonFilter" object so that we can share methods and properties between all parts of the object.
+    var self = this; // As a best practice, in each method we will assign "this" to the variable "self" so that it remains scope-agnostic. We will use it to refer to the parent "buttonFilter" object so that we can share methods and properties between all parts of the object.
     
     self.$filters = $('#Filters');
     self.$reset = $('#Reset');
@@ -120,6 +120,9 @@ $(function(){
       onMixFail: function(){
         alert('No items were found matching the selected filters.');
       }
-    }
+    },
+	load: {
+		sort: 'random'
+	}
   });    
 });

@@ -1,25 +1,27 @@
 body, button{
-  font-family: 'Helvetica Neue', arial, sans-serif;
+  font-family: sans-serif;
   color: #444;
   background: #ddd;
   margin-left: 0px;
   margin-right: 0px;
 }
  
-/**
- * Form & Button Styles
- */
+/* Form & Button Styles */
 
 h1 {
 	margin: 20px 0px 20px 30px;
-	font-weight: bold;
-	font-family: Serif;
+	font-family: 'Lato', cursive;
+    font-weight: bold;
+    line-height: 46px;
+    font-size: 46px;
 }
  
 h4{
-  font-weight: 500;
   margin: 0 10px 0 0;
   display: inline;
+  font-family: 'Grand Hotel', cursive;
+  font-weight: normal;
+  font-size: 25px;
 }
  
 label{
@@ -58,14 +60,14 @@ button:last-of-type{
 button:focus{
   outline: 0 none;
 }
- 
+
 .controls{
   background: #333;
   padding: 15px;
 }
 
 .credit {
-	margin: 30px 0px 0px 30px;
+	margin: 10px 0px 0px 30px;
 	font-size: 80%; 
 } 
 
@@ -143,14 +145,14 @@ fieldset{
   background: #eee;
 }
 
-/**
- * Container/Target Styles
- */
+/* Container/Target Styles */
 
 .container{
   padding: 20px;
-  background: #68b8c4;
+  /* background: #68b8c4; */
+  background: #111;
   text-align: left;
+  font-family: 'Lato', sans-serif;
 }
 
 .container .mix,
@@ -169,6 +171,11 @@ fieldset{
   height: 100px;
   padding: 10px;
   vertical-align: top;
+}
+
+.image{
+	background-repeat: no-repeat; 
+	background-size: inherit; 
 }
 
 /* links styling */
