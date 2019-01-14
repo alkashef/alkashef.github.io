@@ -21,9 +21,11 @@ footer-links:
   email:
   facebook:
   flickr:
-  github: https://github.com/alkashef/
+  github: alkashef 
+  #https://github.com/alkashef/
   instagram:
-  linkedin: http://www.linkedin.com/in/alkashef
+  linkedin: alkashef 
+  #http://www.linkedin.com/in/alkashef
   pinterest:
   rss: # just type anything here for a working RSS icon
   twitter: #jekyllrb
