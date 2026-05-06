@@ -2,22 +2,19 @@
 
 ## Project Context
 
-This is a frontend-only courses website for students.
+This is a frontend-only static AI articles website for `alkashef.ai` / `blog.alkashef.ai`.
 
-Content authoring follows a build-based system:
+The site is a simple Substack-style blog/archive:
 
-* Instructors write course content in a single Markdown file per course.
-* A build script converts Markdown into static HTML pages.
+* Articles are provided manually as Markdown files.
+* A build script converts Markdown articles into static HTML pages.
+* The generated site is published by GitHub Pages.
+* The website has one main page with a sidebar listing articles.
+* Clicking an article in the sidebar opens the generated static article page.
+* No backend is required for the public website.
+* Article generation is outside the scope of this repository.
 
-The website has:
-
-* One landing page listing available courses.
-* Multiple courses.
-* Each course is defined by a single `.md` file.
-* Each course contains a sequence of slides extracted from that file.
-* Each slide is generated as a separate HTML page.
-
-Use only plain HTML, CSS, and JavaScript for the generated site output.
+Use only plain HTML, CSS, and JavaScript for generated site output.
 
 A small local Node.js build script is allowed for Markdown-to-HTML conversion.
 
@@ -25,21 +22,53 @@ Allowed build-time dependency:
 
 * `marked` for Markdown parsing
 
-Do not introduce frontend frameworks, bundlers, transpilers, backend code, browser-side Markdown rendering, runtime dependencies, or unnecessary npm packages.
+Do not introduce frontend frameworks, bundlers, transpilers, backend code, browser-side Markdown rendering, runtime dependencies, databases, CMS platforms, AI API calls, prompt-generation scripts, or unnecessary npm packages.
+
+---
+
+## Repository Scope
+
+This repository is responsible only for:
+
+```text
+Manual Markdown articles → static HTML/CSS/JS website → GitHub Pages publication
+```
+
+Out of scope:
+
+* Generating article content with AI.
+* Calling OpenAI, Anthropic, or any other AI API.
+* Managing prompts for report generation.
+* Sending email newsletters.
+* Subscriber management.
+* Backend publishing workflows.
+
+The repository should treat Markdown article files as the source of truth.
 
 ---
 
 ## Primary Goal
 
-Help build a simple, maintainable, desktop-first static website that can be edited safely by a non-frontend developer relying on AI assistance.
+Build a simple, maintainable, automation-friendly static blog that can publish Markdown articles with minimal intervention.
 
-Optimize suggestions for:
+Optimize for:
 
-* Clarity over cleverness.
-* Consistency over novelty.
-* Maintainability over advanced frontend patterns.
-* Readable file structure.
-* Easy manual editing.
+* Free hosting.
+* Fast publishing.
+* Markdown-first authoring.
+* Clean article reading experience.
+* Maintainable plain HTML/CSS/JS.
+* Safe AI-assisted editing.
+* Easy GitHub Pages deployment.
+
+Avoid:
+
+* CMS complexity.
+* Runtime rendering.
+* Heavy JavaScript.
+* Vendor lock-in.
+* Manual HTML editing.
+* Over-engineering.
 
 ---
 
@@ -47,16 +76,13 @@ Optimize suggestions for:
 
 ```text
 /source/
-  /courses/
-    course-name.md
+  /articles/
+    2026-05-06-first-test-article.md
 
 /site/
   index.html
-  /courses/
-    /course-name/
-      index.html
-      slide-01.html
-      slide-02.html
+  /articles/
+    2026-05-06-first-test-article.html
   /assets/
     /css/
       styles.css
@@ -66,15 +92,111 @@ Optimize suggestions for:
 
 /tools/
   build-site.js
+
+README.md
+.github/
+  copilot-instructions.md
 ```
 
 Rules:
 
-* Instructors edit only `/source/`.
+* Edit article content only in `/source/articles/`.
 * `/site/` is generated output.
-* Do not manually edit generated HTML.
-* Build script generates all pages.
-* Keep shared CSS/JS in `/assets/`.
+* Do not manually edit generated HTML in `/site/`.
+* `build-site.js` generates all public HTML pages.
+* Keep shared CSS/JS in `/site/assets/`.
+* Generated article files must use stable filenames.
+* Use relative links only.
+
+---
+
+## Article Authoring Format
+
+Each article is a single Markdown file in `/source/articles/`.
+
+Filename pattern:
+
+```text
+YYYY-MM-DD-short-slug.md
+```
+
+Each article starts with YAML-like metadata followed by Markdown body.
+
+Example:
+
+```md
+---
+title: Weekly AI World Report — 2026-05-06
+date: 2026-05-06
+summary: A practical weekly summary of major AI updates for practitioners.
+tags: [AI, weekly report, tools, research]
+status: published
+---
+
+# Weekly AI World Report — 2026-05-06
+
+## Executive Summary
+
+- **Most important update:** ...
+- **Most useful tool release:** ...
+- **Trend to watch:** ...
+
+## Key Developments
+
+Content goes here.
+```
+
+Metadata rules:
+
+* `title` is required.
+* `date` is required.
+* `summary` is optional but recommended.
+* `tags` are optional.
+* `status` is optional; default is `published`.
+* Articles with `status: draft` must not be published.
+
+Body rules:
+
+* Use normal Markdown.
+* Use one `#` heading at the top.
+* Use `##` for major sections.
+* Prefer lists over tables unless comparison genuinely needs a table.
+* Keep article structure consistent across generated reports.
+
+---
+
+## Site Layout Requirements
+
+The generated website must have a single simple reading interface.
+
+Main layout:
+
+* Left sidebar: article list.
+* Main content: selected article.
+* Header area: site title and short description.
+* Footer: simple static footer.
+
+Sidebar requirements:
+
+* List all published articles in one chronological list.
+* Sort articles by date descending.
+* Show article title and date.
+* Highlight the currently selected article.
+* Use simple links to static article pages.
+
+Article page requirements:
+
+* Reuse the same sidebar on every article page.
+* Display article title, date, summary, tags, and body.
+* Include link back to home.
+* Use readable article width.
+* Avoid clutter.
+
+Home page requirements:
+
+* `site/index.html` should show the latest article by default.
+* Sidebar should list all published articles.
+* If no articles exist, show a clear empty-state message.
 
 ---
 
@@ -82,114 +204,35 @@ Rules:
 
 Maintain one shared visual system across the whole site.
 
-Do not create a new visual style per course unless explicitly requested.
+The design should feel like a clean AI research/newsletter publication:
 
-The shared design system must cover:
-
-* Page layout.
-* Course cards.
-* Slide layout.
-* Typography.
-* Colors.
-* Buttons.
-* Links.
-* Navigation.
-* Spacing.
-* Illustration treatment.
-
-Prefer a clean academic/training style:
-
-* Large readable headings.
-* Clear hierarchy.
-* Generous whitespace.
+* Desktop-first.
+* Readable typography.
+* Calm professional tone.
 * High contrast.
-* Minimal visual clutter.
-* Desktop-first layout.
-* Layouts that scale cleanly with desktop screen size.
-* Content width should adapt to large screens without becoming unreadably wide.
+* Generous whitespace.
+* Strong article hierarchy.
+* Minimal decorative effects.
+* Sidebar that remains usable with many articles.
 
 Avoid:
 
-* Overly decorative effects.
-* Complex animations.
-* Dense visual layouts.
+* Overly decorative visuals.
+* Complex animation.
+* Dense layouts.
+* Magazine-style clutter.
 * Mobile-first complexity unless requested.
 
----
+Design system must cover:
 
-## Course Authoring Format
-
-Each course is defined in a single Markdown file.
-
-Structure:
-
-* Top section: course metadata
-* Body: slides separated by `---`
-
-Example:
-
-```md
----
-course_title: ...
-description: ...
-audience: ...
-time: ...
-instructor: ...
----
-
-# Slide 01: Title
-tags: []
-
-// content
-
----
-
-# Slide 02: Title
-tags: [demo, hands-on]
-
-## Instructions
-
-// steps
-```
-
-Rules:
-
-* Each slide starts with `# Slide XX: Title`.
-* Slides are separated by `---`.
-* Tags control behavior: theme, UI, labels.
-* Sections are optional but standardized.
-
----
-
-## Slide Layout Rules
-
-Each generated slide page must include:
-
-* Top area:
-
-  * Slide title
-  * Optional tags as pills: demo, quiz, hands-on, homework
-* Sidebar:
-
-  * Slide number
-  * Clickable list of slides as table of contents
-  * Current slide clearly highlighted
-* Main content area
-* Bottom navigation:
-
-  * Previous
-  * Next
-  * Progress bar
-
-Progress bar requirements:
-
-* Horizontal segmented bar, one segment per slide.
-* Each segment must be clickable and link to its corresponding slide.
-* Completed slides shown as filled segments.
-* Current slide clearly highlighted.
-* Remaining slides shown as muted segments.
-* Include slide index indicator, e.g. `10 / 16`.
-* Use a linear segmented navigation style.
+* Page layout.
+* Sidebar.
+* Article typography.
+* Tags.
+* Links.
+* Buttons if needed.
+* Empty states.
+* Responsive fallback.
 
 ---
 
@@ -199,98 +242,81 @@ Use Node.js for the build script.
 
 Allowed dependency:
 
-* `marked` for Markdown-to-HTML conversion
+* `marked`
 
-The dependency must be build-time only. The generated site must not depend on `marked` or any runtime library in the browser.
+The dependency is build-time only. The generated site must not depend on `marked` or any runtime Markdown parser.
 
-Do not use bundlers, frontend frameworks, backend services, or browser-side Markdown rendering.
+`tools/build-site.js` must:
 
-The build script must:
+* Read all Markdown files from `/source/articles/`.
+* Parse article metadata.
+* Ignore draft articles.
+* Convert Markdown body to HTML.
+* Generate `site/index.html`.
+* Generate one HTML file per article in `/site/articles/`.
+* Generate the sidebar article navigation.
+* Copy or ensure shared CSS/JS assets are available.
+* Use a single reusable page template.
+* Use relative links.
+* Fail clearly when required metadata is missing.
 
-* Parse course metadata.
-* Split slides.
-* Generate:
+Do not:
 
-  * Course `index.html`
-  * One HTML file per slide
-* Generate sidebar navigation.
-* Generate clickable progress bar.
-* Apply dark theme for tagged slides.
-* Apply consistent layout and section styles.
+* Render Markdown in the browser.
+* Fetch articles at runtime.
+* Generate content dynamically in client-side JavaScript.
+* Use a router.
+* Use a database.
+* Use a CMS.
 
 ---
 
 ## HTML Rules
 
-Suggest simple semantic HTML.
+Write simple semantic HTML.
 
 Use elements such as:
 
 * `header`
 * `main`
-* `section`
 * `article`
+* `aside`
 * `nav`
+* `section`
 * `footer`
 
 Each generated page must include:
 
-* Clear page title.
+* Clear `<title>`.
 * Main heading.
-* Navigation where relevant.
-* Link back to the course page or landing page.
+* Sidebar navigation.
+* Article metadata where relevant.
+* Relative links only.
+* Accessible link text.
 
-Each generated slide page must include:
-
-* Course name.
-* Slide number.
-* Slide title.
-* Main slide content.
-* Previous slide link where applicable.
-* Next slide link where applicable.
-* Navigate up link to the course overview.
-* Link back to the main landing page where appropriate.
-
-Use relative links only.
-
----
-
-## Theme Rules
-
-Slides must support two themes:
-
-* Light theme by default.
-* Dark theme for tagged slides: demo, quiz, hands-on, homework.
-
-Rules:
-
-* Theme must be controlled via a class on the root element, e.g. `body.dark-theme`.
-* Do not duplicate layouts for themes; only override colors and contrast.
-* Ensure readability in both themes.
-
-Tags as pills:
-
-* Must be visually distinct.
-* Must map clearly to slide type.
-* Should be reusable components.
+Do not use inline styles except rare one-off exceptions.
 
 ---
 
 ## CSS Rules
 
-Keep CSS centralized in `/site/assets/css/styles.css`.
+Keep CSS centralized in:
+
+```text
+/site/assets/css/styles.css
+```
 
 Use simple class names that describe purpose, not appearance.
 
 Good examples:
 
+* `.site-shell`
 * `.site-header`
-* `.course-card`
-* `.slide-layout`
-* `.slide-nav`
-* `.content-grid`
-* `.tag-pill`
-* `.progress-segment`
+* `.article-sidebar`
+* `.article-list`
+* `.article-content`
+* `.article-meta`
+* `.tag-list`
 
 Avoid vague or fragile names:
 
@@ -303,15 +329,15 @@ CSS should be organized by sections:
 
 ```css
 /* Base */
+/* Tokens */
 /* Layout */
 /* Header */
-/* Course Cards */
-/* Slides */
 /* Sidebar */
-/* Progress Navigation */
+/* Articles */
 /* Tags */
-/* Standard Sections */
+/* Footer */
 /* Utilities */
+/* Responsive */
 ```
 
 Use CSS custom properties for design tokens:
@@ -320,112 +346,84 @@ Use CSS custom properties for design tokens:
 :root {
   --color-bg: ...;
   --color-text: ...;
+  --color-muted: ...;
+  --color-border: ...;
   --color-primary: ...;
   --space-md: ...;
   --font-main: ...;
 }
 ```
 
-Do not duplicate styles across generated HTML files.
+Avoid frontend code smells:
 
-Avoid common frontend code smells:
-
-* Duplicate HTML structures that should use the same shared classes.
 * Duplicate CSS rules with minor variations.
-* Very large CSS files without clear sections.
-* Very large JavaScript functions.
+* Repeated hardcoded values instead of tokens.
 * Unused CSS classes.
-* Unused JavaScript.
-* Inline styles except for rare one-off exceptions.
-* Hardcoded repeated values instead of design tokens.
-* Inconsistent naming conventions.
-* Overly clever JavaScript for simple static behavior.
+* Excessive specificity.
+* Inline styles.
+* Layout-specific hacks.
 
 ---
 
 ## JavaScript Rules
 
-Use JavaScript only when it meaningfully improves navigation or usability.
+Use JavaScript only when it improves navigation or usability.
 
-Keep JavaScript simple and readable.
+Acceptable uses:
 
-Do not use browser-side JavaScript to generate slides from Markdown.
-
-Acceptable JavaScript uses:
-
-* Highlighting active navigation.
-* Simple keyboard navigation between slides.
-* Small UI helpers.
+* Sidebar collapse on small screens.
+* Active-link enhancement.
+* Simple search/filter for articles.
+* Keyboard shortcut for focusing search.
 
 Avoid:
 
+* Rendering article content with JavaScript.
+* Client-side routing.
 * Complex state management.
-* Dynamic routing.
-* Browser-side Markdown rendering.
 * Framework-like abstractions.
+* Large functions.
+* Unused helpers.
+
+The site must work without JavaScript for basic reading and navigation.
 
 ---
 
-## Slide Design Rules
+## Article Navigation Rules
 
-Slides are HTML pages, but they should feel like teaching slides.
+Article navigation is generated from Markdown files in `/source/articles/`.
 
-Each slide should usually contain:
+Rules:
 
-* One main idea.
-* A clear title.
-* Optional tags: demo, quiz, hands-on, homework.
-* Sidebar with slide navigation.
-* Bottom navigation with progress.
-* Short bullets or concise explanation.
-* Optional illustration or diagram.
-
-Bullet style rules:
-
-* All bullet points must start with `//`.
-* Keep bullets concise and structured.
-
-Standard slide sections, optional when applicable:
-
-* Takeaways
-* References
-* Instructions
-* Deliverables
-
-Rules for sections:
-
-* Sections are optional; do not force them on every slide.
-* When present, they must follow a consistent shared style.
-* Use consistent headings, spacing, and typography across all slides.
-* Do not mix section styles between slides.
-
-Avoid overcrowding slides.
-
-When adding content, prefer:
-
-* One concept per slide.
-* Short paragraphs.
-* Structured lists.
-* Simple diagrams when helpful.
-
-Special slides tagged demo, quiz, hands-on, or homework:
-
-* Must use dark theme.
-* Must emphasize interaction or action.
-* Must be visually distinguishable from normal slides.
+* Do not hardcode article links in HTML.
+* Sort articles by `date` descending.
+* Omit draft articles.
+* Keep article titles readable.
+* Use the article filename slug for the output HTML filename.
+* Highlight the current article in the sidebar.
 
 ---
 
-## Accessibility and Usability
+## GitHub Pages Rules
 
-Maintain basic accessibility:
+Generated output must be compatible with GitHub Pages.
 
-* Use semantic HTML.
-* Use meaningful link text.
-* Add `alt` text to images.
-* Ensure readable contrast.
-* Do not rely on color alone to convey meaning.
-* Keep font sizes readable on desktop screens.
+Rules:
+
+* Static files only.
+* Relative links only.
+* No server-side routing.
+* No backend assumptions.
+* No environment variables in browser code.
+* Public site must not expose secrets.
+
+The deployment target is:
+
+```text
+/site/
+```
+
+If GitHub Pages is configured to publish from repo root, keep an alternative option to copy generated files to root only when explicitly requested.
 
 ---
 
@@ -437,16 +435,13 @@ The README must explain:
 
 * What the website is.
 * The folder structure.
-* How to add a new course Markdown file.
-* How to add a new slide inside a course Markdown file.
-* How slide tags work.
-* How standard slide sections work.
-* Where to place images.
-* How navigation is generated.
-* That the generated site uses plain HTML, CSS, and JavaScript only.
-* That `marked` is allowed only as a build-time Markdown parser.
-* How to install dependencies.
-* How to run the build script.
+* How to add a new article manually.
+* How to build the site.
+* How to preview locally.
+* How publishing to GitHub Pages works.
+* Where images go.
+* That generated HTML in `/site/` should not be manually edited.
+* That `marked` is build-time only.
 
 Update the README whenever project structure or conventions change.
 
@@ -454,43 +449,39 @@ Update the README whenever project structure or conventions change.
 
 ## Copilot Behavior
 
-When suggesting code:
+When suggesting or editing code:
 
-* Preserve existing structure and conventions.
+* Inspect and follow existing file structure and naming conventions.
 * Prefer the smallest safe change.
+* Keep changes focused on the requested task.
 * Do not rewrite unrelated files.
-* Do not introduce dependencies except the approved build-time `marked` dependency.
-* Do not change folder structure unless asked.
+* Do not introduce new dependencies unless explicitly requested.
+* Do not add frameworks, bundlers, transpilers, CMS tools, or backend services.
+* Do not add AI API calls or prompt-generation logic.
 * Reuse existing CSS classes where possible.
-* Keep naming consistent.
-* Prefer explicit, readable code over compact clever code.
-* Treat `/site/` HTML as generated output, not source-of-truth content.
+* Keep generated HTML static and simple.
+* Keep JavaScript optional and progressive-enhancement only.
+* Prefer readable code over clever abstractions.
 
-Before suggesting new code, consider:
+After making changes, check:
 
-* Whether the change belongs in `/source/`, `/tools/`, or `/site/assets/`.
-* Whether an existing class can be reused.
-* Whether the build script should generate the change.
-* Whether relative paths are correct.
-* Whether the README should be updated.
-
-After suggesting changes, check:
-
-* Markdown parsing.
-* Generated relative links.
-* Navigation paths.
-* Shared CSS reuse.
-* README accuracy.
+* The build still runs.
+* Relative links are correct.
+* Sidebar navigation is correct.
+* Draft articles are excluded.
+* Generated pages are static.
+* README remains accurate.
 
 ---
 
-## Default Explanation Style
+## Default Communication Style
 
-When explaining suggested changes:
+When summarizing changes:
 
 * Be concise.
 * State what changed.
 * State which files changed.
+* Mention the build/test command.
 * Mention any follow-up needed.
 
 Do not provide long tutorials unless requested.
