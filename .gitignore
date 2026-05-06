@@ -1,0 +1,8 @@
+# Generated output
+site/
+
+# Dependencies
+node_modules/
+
+# Lock files (regenerated on install)
+package-lock.json
